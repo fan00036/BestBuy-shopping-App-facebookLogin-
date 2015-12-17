@@ -1,0 +1,32 @@
+<ion-view view-title="My Store">
+    <ion-content>
+        <div class="list list-inset">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search by city name" ng-model="searchKey" ng-change="startSearch(searchKey)">
+            </label>
+        </div>
+        <div  class="locationText">
+        <p>Located your position and find the closest stores for you!</p>
+        </div>
+        <div class="row">
+
+            <div class="col">
+                <div class="card" ng-repeat="store in allStores">
+                    <div class="item item-divider">
+                        Store: {{store. name}}
+                    </div>
+                    <div class="item item-text-wrap">
+                        StoreID: {{store. storeId}}
+                        <br/> Address: {{store. address}}
+
+                    </div>
+                    <div class="item item-divider">
+                        Distance from your position: {{store. distance}} miles
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>

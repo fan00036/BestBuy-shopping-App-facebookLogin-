@@ -1,0 +1,67 @@
+<ion-view view-title="Products">
+    <ion-content>
+        <div class="list list-inset">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search by product name" ng-model="searchKey" ng-change="startSearch(searchKey)">
+            </label>
+        </div>
+
+        <div class="slideSetting" height="150" width=auto>
+            <ion-slide-box on-slide-changed="slideHasChanged($index)">
+                <ion-slide>
+                    <img ng-src="img/bestbuy1.png" alt="img" height=auto width=100%>
+                </ion-slide>
+                <ion-slide>
+                    <img ng-src="img/bestbuy2.jpg" alt="img" height=auto width=100%>
+                </ion-slide>
+                <ion-slide>
+                    <img ng-src="img/bestbuy3.jpg" alt="img" height=auto width=100%>
+                </ion-slide>
+            </ion-slide-box>
+        </div>
+
+
+        <!--        <div class="row">-->
+
+        <!--            <div class="col">-->
+
+        <!--
+                <div class="list card cardsize" ng-repeat="product in allProducts">
+
+                    <div class="item item-image">
+                        <img src={{product.image}} alt="img">
+                    </div>
+                    <p>Item No.{{product.sku}}</p>
+                    <p>{{product.name}}</p>
+                    <i class="icon ion-social-usd"></i><span>{{product.salePrice}}</span>
+
+                </div>
+-->
+
+        <div class="list card cardsize" ng-repeat="product in allProducts">
+
+            <div class="productcard">
+                <div class="gid imgDiv" >
+                    <img src={{product.image}} alt="img" height="80" width="80" class="productsImg">
+                </div>
+                <div class="gid itemNo" >
+                    Item No.{{product.sku}}
+                </div>
+                <div class="right price" >
+                    ${{product.salePrice}}
+                </div>
+                <div class="gid product">
+                    <p>{{product.name}}</p>
+                </div>
+                
+            </div>
+
+        </div>
+
+
+      
+
+
+    </ion-content>
+</ion-view>
