@@ -1,103 +1,74 @@
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function ($scope, $http,$ionicModal,localStorageService, $timeout, AuthFactory, $rootScope, $window,authKey,Utility) {
-        // With the new view caching in Ionic, Controllers are only called
-        // when they are recreated or on app start, instead of every page change.
-        // To listen for when this page is active (for example, to refresh data),
-        // listen for the $ionicView.enter event:
-        //$scope.$on('$ionicView.enter', function(e) {
-        //});
-    $rootScope.$on('showLoginModal', function ($event, scope, IS_LOGGEDIN,authKey,cancelCallback, callback) {
-        // Form data for the login modal
-        $scope.loginData = {};
-        $scope = scope || $scope;
-        // Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl('templates/login.html', {
-            scope: $scope
-        }).then(function (modal) {
-            $scope.modal = modal;
-            $scope.login();
-        });
-
-        // Triggered in the login modal to close it
-        $scope.closeLogin = function () {
-            $scope.modal.hide();
-            if (typeof cancelCallback === 'function') {
-                cancelCallback();
-            }
-        };
-
-        // Open the login modal
-        $scope.login = function () {
-            $scope.modal.show();
-        };
-
-        // Perform the login action when the user submits the login form
-        $scope.doLogin = function () {
-            if(AuthFactory.login($scope.loginData.username, $scope.loginData.password))
-            {
-                $window.location.reload();
-            }
-            else
-            {
-                alert("Invalid username or password!");
-            }
-            // Simulate a login delay. Remove this and replace with your login
-            // code if using a login system
-//            $timeout(function () {
-//                $scope.modal.hide();
-//                if (typeof callback === 'function') {
-//                    callback();
-//                    //$window.location.reload();
-//                }
-//            }, 1000);
-
-        };
-
-        // Perform the login action when the user submits the login form
-        $scope.doFacebookLogin = function () {
-            
-            var succeedcallback=function(){
-                $window.location.reload();
-            };
-            var failcallback=function(){
-                $window.location.reload();
-            };
-            AuthFactory.facebooklogin(succeedcallback,failcallback);
-
-            // Simulate a login delay. Remove this and replace with your login
-            // code if using a login system
-            //            $timeout(function () {
-            //                $scope.modal.hide();
-            //                if (typeof callback === 'function') {
-            //                    callback();
-            //                    //$window.location.reload();
-            //                }
-            //            }, 1000);
-        };
-        
-        $scope.LoggedIn = function () {
-
-//            var isLogin = localStorageService.get(IS_LOGGEDIN);
-//    
-//            if(isLogin){
-//                Utility.getFacebookProfile();
-//
-//            }else{
-//                
-//                $scope.login();
-//            }
-        };
+  $rootScope.LoggedIn =  function()
+  {
+    return AuthFactory.isLogged();
+  }
+  // With the new view caching in Ionic, Controllers are only called
+  // when they are recreated or on app start, instead of every page change.
+  // To listen for when this page is active (for example, to refresh data),
+  // listen for the $ionicView.enter event:
+  //$scope.$on('$ionicView.enter', function(e) {
+  //});
+  $rootScope.$on('showLoginModal', function($event, scope, cancelCallback, callback) {
+    // Form data for the login modal
+    $scope.loginData = {};
+    $scope = scope || $scope;
+    // Create the login modal that we will use later
+    $ionicModal.fromTemplateUrl('templates/login.html', {
+      scope: $scope
+    }).then(function(modal) {
+      $scope.modal = modal;
+      $scope.login();
     });
-    $rootScope.loginFromMenu = function () {
-        $rootScope.$broadcast('showLoginModal', $scope, null, function () {
+
+    // Triggered in the login modal to close it
+    $scope.closeLogin = function() {
+      $scope.modal.hide();
+      if (typeof  cancelCallback === 'function') {
+        cancelCallback();
+      }
+    };
+
+    // Open the login modal
+    $scope.login = function()
+    {
+      $scope.modal.show();
+    };
+
+    // Perform the login action when the user submits the login form
+    $scope.doLogin = function() {
+        if(AuthFactory.login($scope.loginData.username, $scope.loginData.password))
+        {
             $window.location.reload();
-        });
-    }
-    $rootScope.logoutFromMenu = function () {
-        AuthFactory.logout();
-        $window.location.reload();
-    }
+        }
+        else
+        {
+                alert("Invalid username or password!");
+
+        }
+    };
+    $scope.doFacebookLogin = function () {
+        var succeedcallback=function(){
+            $window.location.reload();
+        };
+        var failcallback=function(){
+            $window.location.reload();
+        };
+        AuthFactory.facebooklogin(succeedcallback,failcallback);
+    };
+  });
+  $rootScope.loginFromMenu = function() {
+    $rootScope.$broadcast('showLoginModal', $scope, null, function()
+    {
+      $window.location.reload();
+    });
+  }
+  $rootScope.logoutFromMenu = function(){
+    AuthFactory.logout();
+    $window.location.reload();
+  }
     if(!AuthFactory.isLogged())
     {
         $rootScope.$broadcast('showLoginModal', $scope, null, function () {
@@ -115,36 +86,22 @@ angular.module('starter.controllers', [])
             };
             Utility.getFacebookProfile(succeedcallback,failcallback);
         }
-    }
+    } 
 
 })
 
-.controller('logsCtrl', function ($scope, AuthFactory, $rootScope, PlayLists, $window, $window) {
-    $scope.playlists = [];
-    $scope.isEmpty = function () {
-        return $scope.playlists.length == 0;
-    }
-
-    if (AuthFactory.isLogged() == false) {
-        $rootScope.$broadcast('showLoginModal', $scope, null, function () {
-            PlayLists.all().then(function (response) {
-                $scope.playlists = response.data;
-                console.log("Playlist data" + response.data);
-            });
-        });
-    } else {
-        {
-            PlayLists.all().then(function (response) {
-                $scope.playlists = response.data;
-                console.log("Playlist All data" + response.data);
-            });
-        }
-    }
+.controller('logsCtrl', function ($scope, Utility) {
+//    $scope.logs; 
+//    alert(JSON.stringify(Utility.getlogs()));
+    $scope.logs=Utility.getlogs();
 })
 
 .controller('productsCtrl', function ($scope, ProductsApiCall) {
     $scope.allProducts;
     $scope.searchKey;
+    $scope.notResult=function(){
+        return (($scope.allProducts).length==0);
+    }; 
 
     function showProducts(searchKey) {
         if (searchKey == "") {
@@ -182,6 +139,9 @@ angular.module('starter.controllers', [])
     $scope.allStores;
     $scope.searchKey;
     $scope.startSearch;
+    $scope.notResult=function(){
+        return (($scope.allStores).length==0);
+    }; 
     //getStores
     function getStores(latitude, longitude) {
         myStoreFactory.getStore(latitude, longitude)

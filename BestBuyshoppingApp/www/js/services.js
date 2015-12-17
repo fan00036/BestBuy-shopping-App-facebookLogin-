@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
 
-.factory('AuthFactory', function (localStorageService, IS_LOGGEDIN, authKey, authApi, $http, $cordovaOauth) {
+.factory('AuthFactory', function (localStorageService, IS_LOGGEDIN,LOGS, authKey, authApi, $http, $cordovaOauth) {
     return {
         isLogged: function () {
             //      if(localStorageService.get(authKey) == null){
@@ -18,7 +18,9 @@ angular.module('starter.services', [])
                 localStorageService.set(IS_LOGGEDIN, true);
                 return true;
             } else {
-//                alert("Invalid username or password!");
+                var currentlogs=localStorageService.get(LOGS) || [];
+                currentlogs.push((new Date)+"Login failed");
+                localStorageService.set(LOGS, currentlogs);
                 return false;
             }
             //      var credentials = {};
@@ -46,6 +48,9 @@ angular.module('starter.services', [])
                 // error
                 localStorageService.set(IS_LOGGEDIN, false);
                 console.log("Error -> " + error);
+                var currentlogs=localStorageService.get(LOGS) || [];
+                currentlogs.push((new Date)+"Error -> " + error);
+                localStorageService.set(LOGS, currentlogs);
                 if (typeof failcallback === 'function') {
                     failcallback();
                 }
@@ -98,19 +103,23 @@ angular.module('starter.services', [])
         }
     };
 })
-.factory('Utility', function (localStorageService, authKey) {
+.factory('Utility', function (localStorageService, authKey,LOGS) {
     return {
+        getlogs: function () {
+            return localStorageService.get(LOGS) || ["No logs"];
+        },
         getFacebookProfile: function (succeedcallback,failcallback) {
             var accessToken = localStorageService.get(authKey);
-                                                succeedcallback(accessToken);
-$http({
-                method: 'GET',
-                url: 'https://graph.facebook.com/v2.5/me?access_token='+accessToken+'&fields=id,name,picture&format=json'
-            }).success(function (result) {
-
-            }).error(function (error) {
-
-            });
+//$http({
+//                method: 'GET',
+//                url: 'https://graph.facebook.com/v2.5/me?access_token='+accessToken+'&fields=id,name,picture&format=json'
+//            }).success(function (result) {
+//                                                succeedcallback(accessToken);
+//
+//            }).error(function (error) {
+//                                                succeedcallback(accessToken);
+//
+//            });
 //            $http.get("https://graph.facebook.com/v2.5/me", {
 //                                params: {
 //                                    access_token: accessToken,

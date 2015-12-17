@@ -8,13 +8,11 @@
     </h1>
 -->
   </div>
-   <ion-list>
-<!--
-      <ion-item ng-repeat="log in logs" href="#/app/Logs/{{log.id}}">
-        {{log.title}}
-      </ion-item>
--->
-    </ion-list>
+   <ul class="list">
+      <li class="item" ng-repeat="log in logs" >
+          <div class="logstext">Error: {{log}}</div>
+       </li>
+    </ul>
 </ion-content>
 </ion-view>
 

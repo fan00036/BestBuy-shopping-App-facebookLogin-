@@ -10,7 +10,7 @@
         <p>Located your position and find the closest stores for you!</p>
         </div>
         <div class="row">
-
+            <div ng-show="notResult()" class="notfound">Store Not Found!!</div>
             <div class="col">
                 <div class="card" ng-repeat="store in allStores">
                     <div class="item item-divider">

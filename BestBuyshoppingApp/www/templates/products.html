@@ -21,46 +21,31 @@
             </ion-slide-box>
         </div>
 
+        <div ng-show="notResult()" class="notfound">Product Not Found!!</div>
 
-        <!--        <div class="row">-->
-
-        <!--            <div class="col">-->
-
-        <!--
-                <div class="list card cardsize" ng-repeat="product in allProducts">
-
-                    <div class="item item-image">
-                        <img src={{product.image}} alt="img">
-                    </div>
-                    <p>Item No.{{product.sku}}</p>
-                    <p>{{product.name}}</p>
-                    <i class="icon ion-social-usd"></i><span>{{product.salePrice}}</span>
-
-                </div>
--->
 
         <div class="list card cardsize" ng-repeat="product in allProducts">
 
             <div class="productcard">
-                <div class="gid imgDiv" >
+                <div class="gid imgDiv">
                     <img src={{product.image}} alt="img" height="80" width="80" class="productsImg">
                 </div>
-                <div class="gid itemNo" >
+                <div class="gid itemNo">
                     Item No.{{product.sku}}
                 </div>
-                <div class="right price" >
+                <div class="right price">
                     ${{product.salePrice}}
                 </div>
                 <div class="gid product">
                     <p>{{product.name}}</p>
                 </div>
-                
+
             </div>
 
         </div>
 
 
-      
+
 
 
     </ion-content>

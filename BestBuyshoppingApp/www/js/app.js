@@ -7,6 +7,7 @@
 angular.module('starter', ['ionic','ngCordova','ngGeolocation','ngCordovaOauth','LocalStorageModule', 'starter.controllers','starter.services'])
 //auth toekn for the factory
 .constant('authKey','myAuthToken')
+.constant('LOGS','logs')
 .constant('authApi','http://localhost:3000/')
 .constant('IS_LOGGEDIN','isLoggedIn')
 //after device is ready
