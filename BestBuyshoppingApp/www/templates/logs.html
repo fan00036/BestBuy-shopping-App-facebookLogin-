@@ -1,16 +1,10 @@
 <ion-view view-title="Logs">
   <ion-content>
-<!--
-    <div class="bar bar-header bar-assertive"
-    ng-show="isEmpty()">
-    <h1 class="title" ng-show="isEmpty">
-      You must login to view this section.
-    </h1>
--->
+
   </div>
    <ul class="list">
-      <li class="item" ng-repeat="log in logs" >
-          <div class="logstext">Error: {{log}}</div>
+      <li ng-repeat="log in logs" >
+          <div class="logstext">{{log}}</div>
        </li>
     </ul>
 </ion-content>

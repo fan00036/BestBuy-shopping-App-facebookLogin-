@@ -14,8 +14,8 @@
 
     <ion-side-menu side="right">
         <ion-header-bar class="bar-stable">
-            <img ng-src="img/user.png" alt="img" height=35 width=35>
-            <h1 class="title">User Name</h1>
+            <img ng-src={{userinfo.profileurl}} alt="img" height=35 width=35>
+            <h1 class="title">{{userinfo.name}}</h1>
         </ion-header-bar>
         <ion-content>
             <ion-list>

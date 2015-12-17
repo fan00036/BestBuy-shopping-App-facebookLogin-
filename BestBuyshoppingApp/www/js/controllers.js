@@ -54,7 +54,7 @@ angular.module('starter.controllers', [])
             $window.location.reload();
         };
         var failcallback=function(){
-            $window.location.reload();
+//            $window.location.reload();
         };
         AuthFactory.facebooklogin(succeedcallback,failcallback);
     };
@@ -69,6 +69,7 @@ angular.module('starter.controllers', [])
     AuthFactory.logout();
     $window.location.reload();
   }
+  $rootScope.userinfo;
     if(!AuthFactory.isLogged())
     {
         $rootScope.$broadcast('showLoginModal', $scope, null, function () {
@@ -76,16 +77,8 @@ angular.module('starter.controllers', [])
         });
     }
     else{
-        if(AuthFactory.isFacebookloggedin())
-        {
-            var succeedcallback=function(accessToken){
-                alert(accessToken);                
-            };
-            var failcallback=function(){
-                alert("There was a problem getting your profile.");                
-            };
-            Utility.getFacebookProfile(succeedcallback,failcallback);
-        }
+        $rootScope.userinfo=Utility.getProfile();
+//        alert(JSON.stringify($rootScope.userinfo));
     } 
 
 })
@@ -166,14 +159,6 @@ angular.module('starter.controllers', [])
     }
 
     $scope.$on("$ionicView.enter",function(){
-        //alert("hi");
-        
-//        $geolocation.getCurrentPosition({
-//            timeout: 60000
-//         }).then(function(position) {
-//            $scope.myPosition = position;
-//            alert(position);
-//         });
         
         //geolocation
     $geolocation.getCurrentPosition({

@@ -65,5 +65,10 @@
 .logstext{
     width: 90%;
     height: auto;
-    font-size: 12px;
+    font-size: 15px;
+    margin:0 auto;
+    padding: 5px;
+}
+ul.list{
+    list-style-type: circle;
 }
