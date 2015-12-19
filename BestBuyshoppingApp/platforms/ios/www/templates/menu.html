@@ -1,0 +1,41 @@
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-stable">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+
+            <ion-nav-buttons side="right">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="right">
+                </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="right">
+        <ion-header-bar class="bar-stable">
+            <img ng-src={{userinfo.profileurl}} alt="img" height=35 width=35>
+            <h1 class="title">{{userinfo.name}}</h1>
+        </ion-header-bar>
+        <ion-content>
+            <ion-list>
+                <ion-item menu-close ng-hide="LoggedIn()" ng-click="loginFromMenu()">
+                    Login
+                </ion-item>
+                <ion-item menu-close href="#/app/products">
+                    Products
+                </ion-item>
+                <ion-item menu-close href="#/app/myStore">
+                    My Store
+                </ion-item>
+                <ion-item menu-close href="#/app/logs">
+                    Logs
+                </ion-item>
+                <ion-item menu-close ng-show="LoggedIn()" ng-click="logoutFromMenu()">
+                    Logout
+                </ion-item>
+
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

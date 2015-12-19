@@ -1,0 +1,74 @@
+.slideSetting {
+    margin: 0 auto;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.locationText {
+    margin: 0 auto;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: 15px;
+    color: grey;
+}
+
+.cardsize {
+    margin: 12px 10px;
+}
+
+.productcard {
+    padding:0;
+    margin: 0;
+}
+.gid{
+    float: left;
+}
+.right{
+    float: right;
+    font-size: 25px;
+    color: #024adb;
+    padding: 5px;
+    text-shadow: 1px 1px #dad9d8;
+}
+.imgDiv{
+    width: 25%;
+    height: 80px;
+}
+.price{
+    padding-top: 10px;
+        width: 25%;
+    font-size: 25px;
+    float: right;
+}
+.itemNo{
+    padding-top: 8px;
+        width: 45%;
+    height: auto;
+    color: grey;
+    font-size: 11px;
+}
+.product{
+    width: 60%;
+    height: auto; 
+    margin: 0;
+}
+.product p {
+    margin: 0;
+}
+.notfound{
+    margin-top: 0 auto;
+    padding-top: 30px;
+    font-family:sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
+.logstext{
+    width: 90%;
+    height: auto;
+    font-size: 15px;
+    margin:0 auto;
+    padding: 5px;
+}
+ul.list{
+    list-style-type: circle;
+}
